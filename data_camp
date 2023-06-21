@@ -1,0 +1,20 @@
+--Data set: Data Manipulation in SQL from Data Camp
+--Source: Data Camp(https://campus.datacamp.com/courses/data-manipulation-in-sql)
+
+
+# In the below code I am filtering out FC Barcelona game results using the CASE function.
+
+home_team_FC_Barcelona_results = 
+ """
+ SELECT 
+	m.date,
+	t.team_long_name AS opponent,
+	CASE WHEN m.home_goal > m.away_goal THEN 'Barcelona win!'
+        WHEN m.home_goal < m.away_goal THEN 'Barcelona loss :(' 
+        ELSE 'Tie' END AS outcome 
+FROM matches_spain AS m
+LEFT JOIN teams_spain AS t 
+ON m.awayteam_id = t.team_api_id
+WHERE m.hometeam_id = '8634'; 
+"""
+
