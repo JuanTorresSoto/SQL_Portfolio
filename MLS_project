@@ -3,21 +3,22 @@
 --Queried using: BigQuery
 
 # Analyzing the change in total and average attendance for MLS teams prior to the integration of LAFC
-attendance_pre_lafc = """
+
+--attendance_pre_lafc = """
                    SELECT home, SUM(attendance) AS total_attendance, ROUND(AVG(attendance),0) AS avg_attendance
                    FROM `mls-project-387518.match_data.clean_2017` 
                    GROUP BY home 
                    ORDER BY total_attendance DESC;
                    """
                    
-attendance_post_lafc = """
+--attendance_post_lafc = """
                     SELECT home, SUM(attendance) AS total_attendance, ROUND(AVG(attendance),0) AS avg_attendance
                     FROM `mls-project-387518.match_data.2018` 
                     GROUP BY home 
                     ORDER BY total_attendance DESC;
                     """
                     
-change_in_attendance = """
+--change_in_attendance = """
                     SELECT t1.home, ROUND(AVG(t1.attendance),0) - ROUND(AVG(t2.attendance),0) AS change_in_attendance
                     FROM `mls-project-387518.match_data.2018` AS t1
                     FUll JOIN `mls-project-387518.match_data.clean_2017` AS t2 
@@ -26,5 +27,5 @@ change_in_attendance = """
                     """
 
 # To get a more unbiased analysis, I took 70 games per team prior to LAFC integration.
-This equals the same number of games that had attendance recorded post-integration,
+This equals around the same number of games that had customers attend post-integration,
 excluding the COVID games that reflected no attendance. 
